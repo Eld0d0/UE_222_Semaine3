@@ -1,58 +1,54 @@
 <header class="d-flex justify-content-center py-3">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav">
-                {# La page d'accueil redirige automatiquement vers la page des articles
-                Le lien est là juste pour faire bonne figure #}
-                <li class="nav-item">
-                    <a class="nav-link" href="/">Accueil</a>
-                </li>
+        <div class="container-fluid">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/">Accueil</a>
+                    </li>
 
-                {# Si on est sur la page articles on aura les données renvoyé par le
-                contrôleur permettant d'afficher la liste des articles en dropdown #}
-                {% if articles is defined %}
-                <li class="nav-item dropdown active">
-                    <a class="nav-link dropdown-toggle" href="/article" id="navbarDropdownMenuLink" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Articles
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        {% for article in articles %}
-                        <a class="dropdown-item" href="/article/{{ article.id }}">{{ article.title }}</a>
-                        {% endfor %}
-                    </div>
-                </li>
-                {# Sinon on affiche juste un lien pour la page des articles #}
-                {% else %}
-                <li class="nav-item">
-                    <a class="nav-link" href="/article">
-                        Articles
-                    </a>
-                </li>
-                {% endif %}
+                    {# Si on est sur la page articles on aura les données renvoyé par le
+                    contrôleur permettant d'afficher la liste des articles en dropdown #}
+                    {% if articles is defined %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="/article" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Articles
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            {% for article in articles %}
+                            <li><a class="dropdown-item" href="{{ path('article_show', {'id': article.id}) }}">{{ article.title }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/article">Articles</a>
+                    </li>
+                    {% endif %}
 
-                {# On fait la même chose pour la page des catégories #}
-                {% if categories is defined %}
-                <li class="nav-item dropdown active"></li>
-                <a class="nav-link dropdown-toggle" href="/category" id="navbarDropdownMenuLink" role="button"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Catégories
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    {% for category in categories %}
-                    <a class="dropdown-item" href="/article/{{ category.id }}">{{ category.name }}</a>
-                    {% endfor %}
-                </div>
-                </li>
-                {% else %}
-                <li class="nav-item">
-                    <a class="nav-link" href="/category">
-                        Catégories
-                    </a>
-                </li>
-                {% endif %}
-            </ul>
 
+
+                    {% if categories is defined %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="/category" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Catégories
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            {% for category in categories %}
+                            <li><a class="dropdown-item" href="{{ path('category_show', {'id': category.id}) }}">{{ category.name }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/category">Catégories</a>
+                    </li>
+                    {% endif %}
+
+
+
+
+            </div>
         </div>
     </nav>
 </header>
